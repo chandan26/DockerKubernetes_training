@@ -1,0 +1,353 @@
+    1  sudo yum install -y yum-utils
+    2  rpm -qa | grep docker
+    3  docker run docker/whalesay cowsay whoooo
+    4  cat <<EOF > /etc/yum.repos.d/kubernetes.repo
+    5  [kubernetes]
+    6  name=Kubernetes
+    7  baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
+    8  enabled=1
+    9  gpgcheck=1
+   10  repo_gpgcheck=1
+   11  gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+   12  EOF
+   13  sudo setenforce 0
+   14  sudo sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config
+   15  yum install -y kubelet-1.20.0-0 kubeadm-1.20.0-0 kubectl-1.20.0-0
+   16  systemctl enable kubelet
+   17  systemctl start kubelet
+   18  kubeadm init --apiserver-advertise-address=10.190.0.5 --pod-network-cidr=192.168.0.0/16
+   19  kubeadm reset
+   20  rpm -qa | grep docker
+   21  systemctl enable docker
+   22  systemctl start docker
+   23  docker run docker/whalesay cowsay lmao
+   24  docker ps -a
+   25  clear 
+   26  cat <<EOF > /etc/yum.repos.d/kubernetes.repo
+   27  [kubernetes]
+   28  name=Kubernetes
+   29  baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
+   30  enabled=1
+   31  gpgcheck=1
+   32  repo_gpgcheck=1
+   33  gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+   34  EOF
+   35  sudo setenforce 0
+   36  sudo sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config
+   37  yum install -y kubelet-1.20.0-0 kubeadm-1.20.0-0 kubectl-1.20.0-0
+   38   systemctl enable kubelet
+   39  systemctl start kubelet
+   40  ip addr
+   41  kubeadm init --apiserver-advertise-address=10.190.0.8 --pod-network-cidr=192.168.0.0/16
+   42  kubeadm reset
+   43  kubeadm init --apiserver-advertise-address=10.190.0.8 --pod-network-cidr=192.168.0.0/16
+   44  mkdir -p $HOME/.kube
+   45  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+   46  sudo chown $(id -u):$(id -g) $HOME/.kube/config
+   47  kubectl get nodes
+   48  mkdir kubes-selfpaced
+   49  ll
+   50  cd kubes-selfpaced/
+   51  vi replica-set.yml
+   52  kubectl create -f replica-set.yml 
+   53  yum install bash-completion
+   54  source /usr/share/bash-completion/bash_completion
+   55  kubectl get po
+   56  kubectl get no
+   57  kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
+   58  kubectl delete -f replica-set.yml 
+   59  kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
+   60  kubectl get no
+   61  kubectl create -f replica-set.yml 
+   62  kubectl get po
+   63  kubectl get po -o wide
+   64  kubectl get po --show-labels
+   65  kubectl create pdb pdb1 --selector=app=chandan-app --max-unavialble=3
+   66  kubectl create pdb pdb1 --selector=app=chandan-app --max-unavailble=3
+   67  kubectl create poddisruptionbudget --help
+   68  kubectl create pdb pdb1 --selector=app=chandan-app --max-unavailable=3
+   69  kubectl describe pdb pdb1
+   70  kubectl get no
+   71  kubectl get po -o wide
+   72  kubectl  drain kube-worker-1 --ignore-daemonsets
+   73  kubectl get po -o wide
+   74  kubectl  drain kube-worker-2 --ignore-daemonsets
+   75  kubectl delete  pdb pdb1 --selector=app=chandan-app 
+   76  kubectl delete  pdb pdb1 
+   77  kubectl create pdb pdb1 --selector=app=chandan-app --max-unavailable=2
+   78  kubectl get no
+   79  kubectl uncordon kube-worker-1
+   80  kubectl uncordon kube-worker-2
+   81  kubectl get po
+   82  kubectl get po -o wide
+   83  kubectl  drain kube-worker-3 --ignore-daemonsets
+   84  history 
+   85  kubectl get po
+   86  cd /
+   87  ll
+   88  cd 
+   89  cd kubes-selfpaced/
+   90  ll
+   91  kubectl get no
+   92  kubectl uncordon kube-worker-3
+   93  kubectl create pdb --help
+   94  kubectl delete pdb pdb1
+   95  kubectl delete -f replica-set.yml 
+   96  kubectl create -f replica-set.yml 
+   97  kubectl create pdb pdb1 --selector=app=chandan-app --min-available=4
+   98  kubectl get po
+   99  kubectl get po -o wide
+  100  kubectl drain --help
+  101  kubectl get no
+  102  kubectl get po
+  103  kubectl get po -o wide
+  104  kubectl drain kube-worker-3 --ignore-daemonsets
+  105  kubectl get po --show-labels
+  106  echo 'source <(kubectl completion bash)' >>~/.bashrc
+  107  kubectl completion bash >/etc/bash_completion.d/kubectl
+  108  echo 'alias k=kubectl' >>~/.bashrc
+  109  echo 'complete -F __start_kubectl k' >>~/.bashrc
+  110  source /usr/share/bash-completion/bash_completion
+  111  sudo curl     -L https://raw.githubusercontent.com/docker/compose/1.29.2/contrib/completion/bash/docker-compose     -o /etc/bash_completion.d/docker-compose
+  112  history | tail -n 20
+  113  history | tail -n 20 >> kubectl-autocomplete.txt
+  114  ll
+  115  yum install git -y
+  116  git init 
+  117  git add .
+  118  ll
+  119  git commit -m "kubectl autocomplete history commands"
+  120  git push -u origin master
+  121  git push -u origin main
+  122  git remote add origin https://github.com/chandan26/DockerKubernetes_training.git
+  123  git push -u origin main
+  124  git pull
+  125  ll
+  126  git branch --set-upstream-to=origin/master
+  127  git fetch
+  128  ll
+  129  git add .
+  130  git commit -m "kubectl autocomplete history commands"
+  131  git branch --set-upstream-to=origin/master
+  132  git push -u origin master
+  133  git merge main
+  134  git merge origin/main
+  135  ll
+  136  git check out main
+  137  git checkout main
+  138  git merge origin/main
+  139  git checkout master
+  140  git merge origin/main
+  141  git push
+  142  git merge origin/main
+  143  git checkout master
+  144  git checkout main
+  145  git merge origin/master
+  146  reboot
+  147  kubectl get pod
+  148  kubectl get po --show-labels 
+  149  kubectl get po --show-labels -o wide
+  150  kubectl get no --show-labels -o wide
+  151  cd kubes-selfpaced/
+  152  ll
+  153  history | tail -n 30
+  154  history | tail -n 60
+  155  history | tail -n 60 | head -n 40
+  156  history | tail -n 60 | head -n 45 >> kubecommand-options-comple.txt
+  157  ll
+  158  cat kubectl-autocomplete.txt 
+  159  git add kubecommand-options-comple.txt
+  160  git commit -m "kubernetes command option completion commands"
+  161  git push -u origin master
+  162  git pull
+  163  ll
+  164  git push -u origin main
+  165  kubectl pdb describe pdb1
+  166  kubectl describe pdb pdb1
+  167  kubectl describe --help
+  168  kubectl get po
+  169  kubectl describe pods myreplicaset-khj5r
+  170  fslint
+  171  yum install fslint.noarch nt -y
+  172  rpm -qa | grep fslint
+  173  kubectl get po -o wide
+  174  kubectl get no -o wide
+  175  kubectl uncordon kube-worker-3
+  176  kubectl delete -f replica-set.yml 
+  177  env | grep etcd
+  178  env | grep ETCD
+  179  etcdctl get po
+  180  kubectl get no
+  181  kubectl get no -o wide
+  182  etcdctl snapshot save etcdbackup
+  183  wget -q --show-progress --https-only --timestamping   "https://github.com/coreos/etcd/releases/download/v3.3.9/etcd-v3.3.9-linux-amd64.tar.gz"
+  184  yum install wget -y
+  185  wget -q --show-progress --https-only --timestamping   "https://github.com/coreos/etcd/releases/download/v3.3.9/etcd-v3.3.9-linux-amd64.tar.gz"
+  186  wget -q --show-progress --https-only --timestamping   "https://github.com/coreos/etcd/releases/download/v3.3.9/etcd-v3.3.9-linux-amd64.tar.gz"
+  187  wget --help
+  188  wget -q --progress --https-only --timestamping   "https://github.com/coreos/etcd/releases/download/v3.3.9/etcd-v3.3.9-linux-amd64.tar.gz"
+  189  wget -q --progress  --timestamping   "https://github.com/coreos/etcd/releases/download/v3.3.9/etcd-v3.3.9-linux-amd64.tar.gz"
+  190  wget -q    "https://github.com/coreos/etcd/releases/download/v3.3.9/etcd-v3.3.9-linux-amd64.tar.gz"
+  191  ll
+  192  {   tar -xvf etcd-v3.3.9-linux-amd64.tar.gz;   sudo mv etcd-v3.3.9-linux-amd64/etcd* /usr/local/bin/; }
+  193  {   sudo mkdir -p /etc/etcd /var/lib/etcd;   sudo cp ca.crt etcd-server.key etcd-server.crt /etc/etcd/; }
+  194  sudo mv etcd-v3.3.9-linux-amd64/etcd* /usr/local/bin/
+  195  tar -xvf etcd-v3.3.9-linux-amd64.tar.gz
+  196  sudo mv etcd-v3.3.9-linux-amd64/etcd* /usr/local/bin/
+  197  sudo mkdir -p /etc/etcd /var/lib/etcd
+  198  sudo cp ca.crt etcd-server.key etcd-server.crt /etc/etcd/
+  199  kubectl get no
+  200  kubectl get po
+  201  cd /etc/kubernetes/
+  202  ll
+  203  scp admin.conf root@kube-worker-1:/etc/kubernetes/
+  204  scp admin.conf root@kube-worker-2:/etc/kubernetes/
+  205  ping kube-worker-2
+  206  scp admin.conf root@kube-worker-3:/etc/kubernetes/
+  207  kubectl create -f replica-set.yml 
+  208  cd 
+  209  cd kubes-selfpaced/
+  210  kubectl create -f replica-set.yml 
+  211  kubectl get po -o wide
+  212  init 0
+  213  clear
+  214  kubectl create namespace --help
+  215  kubectl get namespaces 
+  216  kubectl describe namespaces kube-public
+  217  kubectl describe namespaces kube-system 
+  218  kubectl describe namespaces default 
+  219  kubectl get services
+  220  kubectl describe ns
+  221  alias k=kubectl
+  222  k describe ns
+  223  k create ns dev
+  224  k create ns prod
+  225  k get  ns
+  226  k gt --help
+  227  k get help
+  228  k get --help
+  229  k get  ns 
+  230  k get  ns --sort-by=AGE
+  231  k get  ns --sort-by=age
+  232  k get  ns --sort-by='AGE'
+  233  k get  ns --sort-by
+  234  k get  ns --sort-by=name
+  235  k get  ns 
+  236  k create ns qa
+  237  k get  ns 
+  238  k edit ns qa
+  239  cd /tmp/
+  240  ll
+  241  cd systemd-private-43f95881a8ee4c6b8965f3be884e59a0-chronyd.service-lBsYko
+  242  ll
+  243  cd tmp/
+  244  ll
+  245  k get nodes s
+  246  k get nodes 
+  247  k get namespaces 
+  248  k describe namespaces qa
+  249* k edit namespaces q
+  250  k delete namespaces qa
+  251  k delete namespaces prod --force 
+  252  k get namespaces 
+  253  k edit namespaces dev
+  254  kubectl run webapp1 --image=httpd --namespace=dev
+  255  kubectl get nodes --namespace=dev 
+  256  kubectl get pods --namespace=dev 
+  257  kubectl get pods
+  258  ll
+  259  cd kubes-selfpaced/
+  260  ll
+  261  kubectl delete -f replica-set.yml 
+  262  kubectl get pods
+  263  kubectl create -f replica-set.yml --namespace=dev
+  264  kubectl get pods
+  265  kubectl get pods --namespace=dev
+  266  kubectl get pods
+  267  kubectl delete -f replica-set.yml --force 
+  268  kubectl get pods
+  269  kubectl get pods -o wide
+  270  kubectl delete --help
+  271  kubectl delete --all
+  272  kubectl get pods -o wide
+  273  kubectl get nodes
+  274  kubectl drain --help
+  275  kubectl get nodes
+  276  kubectl drain kube-worker-2 --ignore-daemonsets
+  277  kubectl get pods
+  278  kubectl logs myreplicaset-2444k
+  279  kubectl describe pod myreplicaset-2444k
+  280  kubectl drain kube-worker-2 --ignore-daemonsets
+  281  kubectl get no
+  282  kubectl get po
+  283  kubectl describe pod myreplicaset-2444k
+  284  kubectl delete pod myreplicaset-2444k
+  285  kubectl get po
+  286  kubectl delete pod -help
+  287  kubectl delete pod --help
+  288  kubectl delete pod myreplicaset-2444k --now 
+  289  tops
+  290  top
+  291  kubectl get po
+  292  kubectl patch pod myreplicaset-2444k -p '{"metadata":{"finalizers":null}}'
+  293  kubectl get po
+  294  myreplicaset-2444k
+  295  kubectl delete pod --grace-period=0 --force myreplicaset-2444k
+  296  kubectl get po
+  297  kubectl patch pod myreplicaset-qswrf -p '{"metadata":{"finalizers":null}}'
+  298  kubectl delete pod --grace-period=0 --force myreplicaset-rcq4j
+  299  kubectl delete pod --grace-period=0 --force myreplicaset-qswrf
+  300  kubectl get po
+  301  kubectl get po --namespace=dev
+  302  kubectl describe pod webapp1
+  303  kubectl describe pod webapp1 --namespace=dev
+  304  kubectl get events
+  305  kubectl get events --namespace=dev
+  306  kubectl get pods --namespace-dev
+  307  kubectl get pods --namespace=dev
+  308  kubectl edit pod myreplicaset-9csxq
+  309  kubectl edit pod myreplicaset-9csxq --namespace=dev
+  310  kubectl edit pod --namespace=dev webapp1
+  311  cd /var/lib/kubelet/
+  312  ll
+  313  cat config.yaml 
+  314  cd pods
+  315  ll
+  316  cd e66aea807313e9c2677f834f6b22cbad
+  317  ll
+  318  cat etc-hosts 
+  319  cd containers/
+  320  ll
+  321  cd etcd/
+  322  ll
+  323  cd 0f4987cf
+  324  cat 0f4987cf
+  325  pwd
+  326  cd
+  327  service kubelet status
+  328  kubectl get po
+  329  kubectl get po --namespace=dev
+  330  cd /etc/system/
+  331  cd /etc/systemd/
+  332  ll
+  333  cd /etc/
+  334  ll
+  335  ll | grep kube*
+  336  cd kubernetes/
+  337  ll
+  338  cd /etc/systemd/
+  339  ll
+  340  cd system/
+  341  ll
+  342  pwd
+  343  cd kube*
+  344  cd /var/lib/kubelet/
+  345  ll
+  346  cat config.yaml 
+  347  cd /etc/kubernetes/manifests
+  348  ll
+  349  kubectl get pod -A
+  350  cd
+  351  ll
+  352  cd kubes-selfpaced/
+  353  history >> 19-09-21.txt
