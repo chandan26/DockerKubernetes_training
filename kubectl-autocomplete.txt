@@ -1,0 +1,20 @@
+   94  kubectl delete pdb pdb1
+   95  kubectl delete -f replica-set.yml 
+   96  kubectl create -f replica-set.yml 
+   97  kubectl create pdb pdb1 --selector=app=chandan-app --min-available=4
+   98  kubectl get po
+   99  kubectl get po -o wide
+  100  kubectl drain --help
+  101  kubectl get no
+  102  kubectl get po
+  103  kubectl get po -o wide
+  104  kubectl drain kube-worker-3 --ignore-daemonsets
+  105  kubectl get po --show-labels
+  106  echo 'source <(kubectl completion bash)' >>~/.bashrc
+  107  kubectl completion bash >/etc/bash_completion.d/kubectl
+  108  echo 'alias k=kubectl' >>~/.bashrc
+  109  echo 'complete -F __start_kubectl k' >>~/.bashrc
+  110  source /usr/share/bash-completion/bash_completion
+  111  sudo curl     -L https://raw.githubusercontent.com/docker/compose/1.29.2/contrib/completion/bash/docker-compose     -o /etc/bash_completion.d/docker-compose
+  112  history | tail -n 20
+  113  history | tail -n 20 >> kubectl-autocomplete.txt

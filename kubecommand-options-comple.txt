@@ -1,0 +1,45 @@
+   97  kubectl create pdb pdb1 --selector=app=chandan-app --min-available=4
+   98  kubectl get po
+   99  kubectl get po -o wide
+  100  kubectl drain --help
+  101  kubectl get no
+  102  kubectl get po
+  103  kubectl get po -o wide
+  104  kubectl drain kube-worker-3 --ignore-daemonsets
+  105  kubectl get po --show-labels
+  106  echo 'source <(kubectl completion bash)' >>~/.bashrc
+  107  kubectl completion bash >/etc/bash_completion.d/kubectl
+  108  echo 'alias k=kubectl' >>~/.bashrc
+  109  echo 'complete -F __start_kubectl k' >>~/.bashrc
+  110  source /usr/share/bash-completion/bash_completion
+  111  sudo curl     -L https://raw.githubusercontent.com/docker/compose/1.29.2/contrib/completion/bash/docker-compose     -o /etc/bash_completion.d/docker-compose
+  112  history | tail -n 20
+  113  history | tail -n 20 >> kubectl-autocomplete.txt
+  114  ll
+  115  yum install git -y
+  116  git init 
+  117  git add .
+  118  ll
+  119  git commit -m "kubectl autocomplete history commands"
+  120  git push -u origin master
+  121  git push -u origin main
+  122  git remote add origin https://github.com/chandan26/DockerKubernetes_training.git
+  123  git push -u origin main
+  124  git pull
+  125  ll
+  126  git branch --set-upstream-to=origin/master
+  127  git fetch
+  128  ll
+  129  git add .
+  130  git commit -m "kubectl autocomplete history commands"
+  131  git branch --set-upstream-to=origin/master
+  132  git push -u origin master
+  133  git merge main
+  134  git merge origin/main
+  135  ll
+  136  git check out main
+  137  git checkout main
+  138  git merge origin/main
+  139  git checkout master
+  140  git merge origin/main
+  141  git push
