@@ -1,0 +1,150 @@
+    1   sudo yum install -y yum-utils
+    2  yum install -y yum-utils
+    3  rpm -qa | grep docker
+    4  systemctl enable docker
+    5  systemctl start docker
+    6  cat <<EOF > /etc/yum.repos.d/kubernetes.repo
+    7  [kubernetes]
+    8  name=Kubernetes
+    9  baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
+   10  enabled=1
+   11  gpgcheck=1
+   12  repo_gpgcheck=1
+   13  gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+   14  exclude=kubelet kubeadm kubectl
+   15  EOF
+   16  sudo setenforce 0
+   17  sudo sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config
+   18  yum install -y kubelet-1.20.0-0 kubeadm-1.20.0-0 kubectl-1.20.0-0
+   19  yum install -y kubelet-1.20.0-0 kubeadm-1.20.0-0 kubectl-1.20.0-0 --disableexcludes=kubernetes
+   20  sudo systemctl enable --now kubelet
+   21  systemctl start kubelet
+   22  systemctl status kubelet
+   23  ip addr
+   24  kubeadm init --apiserver-advertise-address=10.190.0.12 --pod-network-cidr=192.168.0.0/16
+   25  mkdir -p $HOME/.kube
+   26  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+   27  sudo chown $(id -u):$(id -g) $HOME/.kube/config
+   28  kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
+   29  kubectl get pods -A
+   30  kubectl get pods -A | wc -l
+   31  kubectl get pods -A
+   32  kubectl get nodes
+   33  kubectl get pods -A | wc -l
+   34  kubectl get pods -A 
+   35  kubectl get ns
+   36  echo 'source <(kubectl completion bash)' >>~/.bashrc
+   37  kubectl completion bash >/etc/bash_completion.d/kubectl
+   38  echo 'alias k=kubectl' >>~/.bashrc
+   39  echo 'complete -F __start_kubectl k' >>~/.bashrc
+   40  source /usr/share/bash-completion/bash_completion
+   41  cd /usr/share/
+   42  ll
+   43  ll| bash
+   44  ll| grep bash
+   45  source /usr/share/bash-completion/
+   46  cd bash-completion/
+   47  ll
+   48  cd completions/
+   49  ll
+   50  sudo curl     -L https://raw.githubusercontent.com/docker/compose/1.29.2/contrib/completion/bash/docker-compose     -o /etc/bash_completion.d/docker-compose
+   51  source /usr/share/bash-completion/bash_completion
+   52  reboot
+   53  history 
+   54  source /usr/share/bash-completion/bash_completion
+   55  source /etc/bash_completion
+   56  yum install -y bash-completion
+   57  source /etc/profile.d/bash_completion.sh
+   58  source <(kubectl completion bash)
+   59  kubectl get namespaces 
+   60  kubectl describe namespaces kube-node-lease 
+   61  mkdir k8s-self-paced
+   62  ll
+   63  cd k8s-self-paced/
+   64  ll
+   65  git pull
+   66  yum install git
+   67  cd /etc/kubernetes/
+   68  ll
+   69  kubectl get nodes -o wide
+   70  scp admin.conf root@kube-worker-1:/etc/kubernetes/
+   71  scp admin.conf root@kube-worker-2:/etc/kubernetes/
+   72  scp admin.conf root@kube-worker-3:/etc/kubernetes/
+   73  kubectl get pods -A 
+   74  kubectl get pods -A | wc -l
+   75  cd /var/lib/kubelet/
+   76  ll
+   77  cd ..
+   78  ll
+   79  cd /etc/systemd/system/
+   80  ll
+   81  locate kubelet.service.d
+   82  find kubelet.service.d
+   83  cd ..
+   84  pwd
+   85  cd system/
+   86  pwd
+   87  ll
+   88  cd /var/lib/kubelet/
+   89  ll
+   90  cat config.yaml 
+   91  cd /etc/kubernetes/manifests
+   92  ll
+   93  ct kube-apiserver.yaml 
+   94  cat kube-apiserver.yaml 
+   95  cd
+   96  ll
+   97  cd k8s-self-paced/
+   98  pws
+   99  pwd
+  100  kubectl run static --image=nginx --dry-run=client -o yaml > static.yaml
+  101  ll
+  102  rpm -qa | grep git
+  103  cat -n *
+  104  vi static.yaml 
+  105  cp static.yaml /etc/kubernetes/manifests/
+  106  kubectl get pod
+  107  ll
+  108  cd /etc/kubernetes/manifests/
+  109  ll
+  110  rm static.yaml 
+  111  kubectl get pod
+  112  pwd
+  113  ll
+  114  cd
+  115  cd k8s-self-paced/
+  116  ll
+  117  cat -n *
+  118  kubectl create namespace dev
+  119  kubectl create namespace qa
+  120  kubectl create namespace prod
+  121  vi static.yaml 
+  122  cp static.yaml /etc/kubernetes/manife
+  123  cd /etc/kubernetes/manifests/
+  124  ll
+  125  cd /etc/kubernetes/
+  126  ll
+  127  cd manife
+  128  rm -rf manife
+  129  ll
+  130  kubectl get po
+  131  kubectl get po --namespace=dev
+  132  cd
+  133  cd k8s-self-paced/
+  134  ll
+  135  cp static.yaml /etc/kubernetes/manifests/
+  136  ll /etc/kubernetes/manifests/
+  137  kubectl get po --namespace=dev
+  138  cd -
+  139  cd /etc/kubernetes/manifests/
+  140  ll
+  141  rm -rf static.yaml 
+  142  kubectl get po --namespace=dev
+  143  cd /root/k8s-self-paced/
+  144  ll
+  145  cat -n *
+  146  rpm -qa | grep git
+  147  git init
+  148  git add static.yaml 
+  149  git commit -m "static pod deployment yml file"
+  150  history >>static-pod-deply-commnd.txt
