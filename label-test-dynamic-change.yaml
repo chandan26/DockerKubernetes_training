@@ -1,0 +1,173 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    cni.projectcalico.org/containerID: 1a340e0d1df12ca62843cb291779377fd574aec98bbd07279d5a293e653adc16
+    cni.projectcalico.org/podIP: 192.168.127.6/32
+    cni.projectcalico.org/podIPs: 192.168.127.6/32
+  creationTimestamp: "2021-09-21T16:37:07Z"
+  labels:
+    run: pod1
+    webver: "4"
+  managedFields:
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:labels:
+          .: {}
+          f:run: {}
+      f:spec:
+        f:containers:
+          k:{"name":"pod1"}:
+            .: {}
+            f:image: {}
+            f:imagePullPolicy: {}
+            f:name: {}
+            f:resources: {}
+            f:terminationMessagePath: {}
+            f:terminationMessagePolicy: {}
+        f:dnsPolicy: {}
+        f:enableServiceLinks: {}
+        f:restartPolicy: {}
+        f:schedulerName: {}
+        f:securityContext: {}
+        f:terminationGracePeriodSeconds: {}
+    manager: kubectl-create
+    operation: Update
+    time: "2021-09-21T16:37:07Z"
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:annotations:
+          .: {}
+          f:cni.projectcalico.org/containerID: {}
+          f:cni.projectcalico.org/podIP: {}
+          f:cni.projectcalico.org/podIPs: {}
+    manager: calico
+    operation: Update
+    time: "2021-09-21T16:37:08Z"
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:status:
+        f:conditions:
+          k:{"type":"ContainersReady"}:
+            .: {}
+            f:lastProbeTime: {}
+            f:lastTransitionTime: {}
+            f:status: {}
+            f:type: {}
+          k:{"type":"Initialized"}:
+            .: {}
+            f:lastProbeTime: {}
+            f:lastTransitionTime: {}
+            f:status: {}
+            f:type: {}
+          k:{"type":"Ready"}:
+            .: {}
+            f:lastProbeTime: {}
+            f:lastTransitionTime: {}
+            f:status: {}
+            f:type: {}
+        f:containerStatuses: {}
+        f:hostIP: {}
+        f:phase: {}
+        f:podIP: {}
+        f:podIPs:
+          .: {}
+          k:{"ip":"192.168.127.6"}:
+            .: {}
+            f:ip: {}
+        f:startTime: {}
+    manager: kubelet
+    operation: Update
+    time: "2021-09-21T16:37:12Z"
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:labels:
+          f:webver: {}
+    manager: kubectl-edit
+    operation: Update
+    time: "2021-09-21T17:38:19Z"
+  name: pod1
+  namespace: default
+  resourceVersion: "127208"
+  uid: bb47a4c1-4505-4d8b-9138-54ad9260e818
+spec:
+  containers:
+  - image: httpd
+    imagePullPolicy: Always
+    name: pod1
+    resources: {}
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: default-token-wbwb9
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  nodeName: kube-worker-2
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: default-token-wbwb9
+    secret:
+      defaultMode: 420
+      secretName: default-token-wbwb9
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2021-09-21T16:37:07Z"
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2021-09-21T16:37:12Z"
+    status: "True"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2021-09-21T16:37:12Z"
+    status: "True"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2021-09-21T16:37:07Z"
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: docker://d133dcea57ccd1c45f153a65583f3c13a87eba7abce351d6f7df083f8455e828
+    image: httpd:latest
+    imageID: docker-pullable://httpd@sha256:af1199cd77b018781e2610923f15e8a58ce22941b42ce63a6ae8b6e282af79f5
+    lastState: {}
+    name: pod1
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2021-09-21T16:37:11Z"
+  hostIP: 10.190.0.11
+  phase: Running
+  podIP: 192.168.127.6
+  podIPs:
+  - ip: 192.168.127.6
+  qosClass: BestEffort
+  startTime: "2021-09-21T16:37:07Z"
