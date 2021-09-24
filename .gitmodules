@@ -1,0 +1,4 @@
+[submodule "DockerKubernetes_training"]
+	path = DockerKubernetes_training
+	url = https://github.com/chandan26/DockerKubernetes_training.git
+	branch = main
